@@ -1,4 +1,10 @@
-cmake_minimum_required(VERSION 3.14)
-project(TestOS ASM_NASM)
+cmake_minimum_required (VERSION 2.9)
+project (ide_support C)
 
-set(CMAKE_ASM_NASM_LINK_EXECUTABLE "ld <CMAKE_ASM_NASM_LINK_FLAGS> <LINK_FLAGS> <OBJECTS>  -o <TARGET> <LINK_LIBRARIES>")
+include_directories(kernel)
+
+add_executable(ide_support
+        kernel/kernel.c
+        kernel/libc/types.h
+        kernel/drivers/ports.h
+        )
