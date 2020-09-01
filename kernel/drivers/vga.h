@@ -49,4 +49,9 @@ void vga_print_str(VgaCell* str, int str_size);
  * */
 void vga_print_cell(VgaCell cell);
 
+/** Prints a message at the cursor
+ * @param msg The message. Must be null terminated
+ * */
+void vga_print(char* msg);
+
 #endif

@@ -60,6 +60,18 @@ void vga_print_str(VgaCell *str, int str_size)
 	vga_set_cursor(offset);
 }
 
+void vga_print(char *msg)
+{
+	int offset = vga_get_cursor();
+
+	for(int i = 0; msg[i]; i++)
+	{
+		vga_internal_print_cell((VgaCell){ msg[i], (VgaAttribute){ VGA_COLOR_WHITE, VGA_COLOR_BLACK } }, &offset);
+	}
+
+	vga_set_cursor(offset);
+}
+
 void vga_internal_print_cell(VgaCell cell, int* offset)
 {
 	VgaCell* video_memory = (VgaCell*)VIDEO_MEMORY_ADDRESS;
