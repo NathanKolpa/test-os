@@ -6,8 +6,7 @@ OBJ = ${C_SOURCES:.c=.o}
 CC = /usr/local/i386elfgcc/bin/i386-elf-gcc
 GDB = /usr/local/i386elfgcc/bin/i386-elf-gdb
 
-INC=-I./kernel
-CFLAGS = -g
+CFLAGS = -g -Ikernel -std=c99
 
 os-image.bin: boot/boot_sector.bin kernel.bin
 	cat $^ > os-image.bin
