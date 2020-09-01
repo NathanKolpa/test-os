@@ -23,6 +23,10 @@ int vga_get_cursor();
  * */
 void vga_internal_print_cell(VgaCell cell, int* offset);
 
+/** Move everything one line up
+ * */
+void vga_scroll_line();
+
 void vga_clear()
 {
 	VgaCell* video_memory = (VgaCell*)VIDEO_MEMORY_ADDRESS;
@@ -68,6 +72,22 @@ void vga_internal_print_cell(VgaCell cell, int* offset)
 	{
 		video_memory[*offset] = cell;
 		*offset += 1;
+	}
+
+	if(*offset >= MAX_COLS * (MAX_ROWS - 1))
+	{
+		vga_scroll_line();
+		*offset -= MAX_COLS;
+	}
+}
+
+void vga_scroll_line()
+{
+	VgaCell* video_memory = (VgaCell*)VIDEO_MEMORY_ADDRESS;
+
+	for(int i = MAX_COLS; i < MAX_ROWS * MAX_COLS; i++)
+	{
+		video_memory[i - MAX_COLS] = video_memory[i];
 	}
 }
 
